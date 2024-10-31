@@ -159,7 +159,7 @@ public class PenghitungUmurFrame extends javax.swing.JFrame {
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         txtAreaPeristiwa.setColumns(20);
-        txtAreaPeristiwa.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        txtAreaPeristiwa.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         txtAreaPeristiwa.setRows(20);
         txtAreaPeristiwa.setBorder(null);
         jScrollPane1.setViewportView(txtAreaPeristiwa);

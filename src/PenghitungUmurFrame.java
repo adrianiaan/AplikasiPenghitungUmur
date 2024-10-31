@@ -1,3 +1,9 @@
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,12 +15,13 @@
  * @author ADRIAN WIN
  */
 public class PenghitungUmurFrame extends javax.swing.JFrame {
-
+    private PenghitungUmurHelper helper;
     /**
      * Creates new form PenghitungUmurFrame
      */
     public PenghitungUmurFrame() {
         initComponents();
+        helper = new PenghitungUmurHelper();
     }
 
     /**
@@ -40,7 +47,7 @@ public class PenghitungUmurFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Penghitung Umur");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aplikasi Penghitung Umur", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 1, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aplikasi Penghitung Umur", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Roboto", 1, 18))); // NOI18N
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
@@ -73,6 +80,12 @@ public class PenghitungUmurFrame extends javax.swing.JFrame {
         jPanel1.add(jLabel3, gridBagConstraints);
 
         dateChooserTanggalLahir.setDateFormatString("dd-MM-yyyy");
+        dateChooserTanggalLahir.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        dateChooserTanggalLahir.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dateChooserTanggalLahirPropertyChange(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -81,6 +94,9 @@ public class PenghitungUmurFrame extends javax.swing.JFrame {
         gridBagConstraints.weightx = 15.0;
         gridBagConstraints.insets = new java.awt.Insets(2, 10, 2, 10);
         jPanel1.add(dateChooserTanggalLahir, gridBagConstraints);
+
+        txtUmur.setEditable(false);
+        txtUmur.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -91,6 +107,9 @@ public class PenghitungUmurFrame extends javax.swing.JFrame {
         gridBagConstraints.weightx = 15.0;
         gridBagConstraints.insets = new java.awt.Insets(2, 10, 2, 10);
         jPanel1.add(txtUmur, gridBagConstraints);
+
+        txtHariUlangTahunBerikutnya.setEditable(false);
+        txtHariUlangTahunBerikutnya.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -105,6 +124,11 @@ public class PenghitungUmurFrame extends javax.swing.JFrame {
         btnHitung.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         btnHitung.setText("Hitung Umur");
         btnHitung.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnHitung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHitungActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -115,6 +139,11 @@ public class PenghitungUmurFrame extends javax.swing.JFrame {
         btnKeluar.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         btnKeluar.setText("Keluar");
         btnKeluar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKeluarActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -141,6 +170,38 @@ public class PenghitungUmurFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnHitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungActionPerformed
+        Date tanggalLahir = dateChooserTanggalLahir.getDate();
+            if (tanggalLahir != null) {
+                // Menghitung umur dan hari ulang tahun berikutnya
+                LocalDate lahir =
+                tanggalLahir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate sekarang = LocalDate.now();
+                String umur = helper.hitungUmurDetail(lahir, sekarang);
+                txtUmur.setText(umur);
+                
+                // Menghitung tanggal ulang tahun berikutnya
+                LocalDate ulangTahunBerikutnya =
+                helper.hariUlangTahunBerikutnya(lahir, sekarang);
+                String hariUlangTahunBerikutnya =
+                helper.getDayOfWeekInIndonesian(ulangTahunBerikutnya);
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+                String tanggalUlangTahunBerikutnya = ulangTahunBerikutnya.format(formatter);
+                txtHariUlangTahunBerikutnya.setText(hariUlangTahunBerikutnya + "(" + tanggalUlangTahunBerikutnya + ")");
+            }
+    }//GEN-LAST:event_btnHitungActionPerformed
+
+    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnKeluarActionPerformed
+
+    private void dateChooserTanggalLahirPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateChooserTanggalLahirPropertyChange
+        txtUmur.setText("");
+        txtHariUlangTahunBerikutnya.setText("");
+    }//GEN-LAST:event_dateChooserTanggalLahirPropertyChange
 
     /**
      * @param args the command line arguments

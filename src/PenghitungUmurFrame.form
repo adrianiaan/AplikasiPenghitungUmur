@@ -46,7 +46,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Aplikasi Penghitung Umur">
+            <TitledBorder position="1" title="Aplikasi Penghitung Umur">
               <Font PropertyName="font" name="Roboto" size="18" style="1"/>
             </TitledBorder>
           </Border>
@@ -98,7 +98,13 @@
         <Component class="com.toedter.calendar.JDateChooser" name="dateChooserTanggalLahir">
           <Properties>
             <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto" size="12" style="0"/>
+            </Property>
           </Properties>
+          <Events>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="dateChooserTanggalLahirPropertyChange"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="1" gridY="0" gridWidth="1" gridHeight="1" fill="1" ipadX="80" ipadY="0" insetsTop="2" insetsLeft="10" insetsBottom="2" insetsRight="10" anchor="10" weightX="15.0" weightY="0.0"/>
@@ -106,6 +112,12 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtUmur">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto" size="12" style="0"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="1" gridY="1" gridWidth="3" gridHeight="2" fill="1" ipadX="80" ipadY="0" insetsTop="2" insetsLeft="10" insetsBottom="2" insetsRight="10" anchor="10" weightX="15.0" weightY="0.0"/>
@@ -113,6 +125,12 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtHariUlangTahunBerikutnya">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto" size="12" style="0"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="1" gridY="3" gridWidth="3" gridHeight="2" fill="1" ipadX="80" ipadY="0" insetsTop="2" insetsLeft="10" insetsBottom="2" insetsRight="10" anchor="10" weightX="15.0" weightY="0.0"/>
@@ -127,6 +145,9 @@
             <Property name="text" type="java.lang.String" value="Hitung Umur"/>
             <Property name="horizontalAlignment" type="int" value="10"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHitungActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="2" gridY="0" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="2" insetsLeft="10" insetsBottom="2" insetsRight="10" anchor="10" weightX="0.0" weightY="0.0"/>
@@ -141,6 +162,9 @@
             <Property name="text" type="java.lang.String" value="Keluar"/>
             <Property name="horizontalAlignment" type="int" value="10"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKeluarActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="3" gridY="0" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="2" insetsLeft="10" insetsBottom="2" insetsRight="10" anchor="10" weightX="0.0" weightY="0.0"/>

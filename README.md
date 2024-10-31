@@ -1,5 +1,6 @@
 # Aplikasi Penghitung Umur
- Latihan 2 - Adrian Akhmad Firdaus (2210010491)
+Latihan 2 - Adrian Akhmad Firdaus (2210010491)
+
 ---
 
 # Deskripsi
